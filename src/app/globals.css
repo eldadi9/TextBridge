@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background:    #f0ece4;
+  --surface:       #faf7f2;
+  --surface-alt:   #f5f0e8;
+  --border:        #e2d9cc;
+  --border-strong: #d4c9b8;
+  --muted:         #9a8870;
+  --accent:        #7a6a56;
+  --ink:           #2c2416;
+  --white:         #ffffff;
+
+  --font-inter: 'Inter', sans-serif;
+  --font-lora:  'Lora', serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--ink);
+  font-family: var(--font-inter);
+  min-height: 100vh;
+}
