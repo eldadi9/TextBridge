@@ -3,9 +3,11 @@ import OpenAI from 'openai'
 import { buildSystemPrompt, buildUserMessage } from '@/lib/prompts'
 import type { TranslationRequest, TranslationResponse } from '@/types'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+let openai: OpenAI | null = null
+function getOpenAI() {
+  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return openai
+}
 
 const MODEL: Record<string, string> = {
   plain: 'gpt-4o-mini',
@@ -21,7 +23,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<TranslationRe
       return NextResponse.json({ output: '', error: 'Empty input' }, { status: 400 })
     }
 
-    const completion = await openai.chat.completions.create({
+    const completion = await getOpenAI().chat.completions.create({
       model: MODEL[mode] ?? 'gpt-4o-mini',
       messages: [
         { role: 'system', content: buildSystemPrompt(mode) },
