@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Bridge towers -->
+  <rect x="5" y="12" width="3" height="14" rx="1" fill="#2c2416"/>
+  <rect x="24" y="12" width="3" height="14" rx="1" fill="#2c2416"/>
+
+  <!-- Bridge deck -->
+  <rect x="4" y="23" width="24" height="2.5" rx="1.25" fill="#2c2416"/>
+
+  <!-- Main cable arch -->
+  <path d="M6.5 12 Q16 4 25.5 12" stroke="#7a6a56" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Suspender lines -->
+  <line x1="10" y1="10.2" x2="10" y2="23" stroke="#7a6a56" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="13.5" y1="7.8" x2="13.5" y2="23" stroke="#7a6a56" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="16" y1="7.2" x2="16" y2="23" stroke="#7a6a56" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="18.5" y1="7.8" x2="18.5" y2="23" stroke="#7a6a56" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="22" y1="10.2" x2="22" y2="23" stroke="#7a6a56" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

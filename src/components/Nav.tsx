@@ -19,17 +19,26 @@ export function Nav({ markdownMode, onMarkdownToggle, onHistoryClick }: NavProps
       }}
     >
       {/* Logo */}
-      <span
-        style={{
-          fontFamily: 'var(--font-lora)',
-          fontSize: '18px',
-          fontWeight: 700,
-          color: 'var(--ink)',
-          letterSpacing: '0.3px',
-        }}
-      >
-        TextBridge
-      </span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <img
+          src="/favicon.svg"
+          alt="TextBridge logo"
+          width={24}
+          height={24}
+          style={{ display: 'block' }}
+        />
+        <span
+          style={{
+            fontFamily: 'var(--font-lora)',
+            fontSize: '18px',
+            fontWeight: 700,
+            color: 'var(--ink)',
+            letterSpacing: '0.3px',
+          }}
+        >
+          TextBridge
+        </span>
+      </div>
 
       {/* Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>

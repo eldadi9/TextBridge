@@ -15,6 +15,11 @@ const lora = Lora({
 export const metadata: Metadata = {
   title: 'TextBridge',
   description: 'English ↔ Hebrew translator with Markdown mode',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
