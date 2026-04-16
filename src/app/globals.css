@@ -17,11 +17,13 @@
   --font-lora:  'Lora', serif;
 }
 
-body {
+html, body {
   background-color: var(--background);
   color: var(--ink);
   font-family: var(--font-inter);
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Mobile: stack panels vertically */

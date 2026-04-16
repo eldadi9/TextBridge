@@ -12,8 +12,8 @@ import HistoryStrip from '@/components/HistoryStrip'
 export default function TranslatePanel() {
   const [inputText, setInputText] = useState('')
   const [outputText, setOutputText] = useState('')
-  const [from, setFrom] = useState<Language>('en')
-  const [to, setTo] = useState<Language>('he')
+  const [from, setFrom] = useState<Language>('he')
+  const [to, setTo] = useState<Language>('en')
   const [markdownMode, setMarkdownMode] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -119,6 +119,7 @@ export default function TranslatePanel() {
             onChange={setInputText}
             onTranslate={handleTranslate}
             isLoading={loading}
+            inputLang={from}
           />
           <OutputPanel
             output={outputText}
@@ -138,6 +139,20 @@ export default function TranslatePanel() {
           onClear={clearHistory}
         />
       )}
+
+      <footer
+        style={{
+          textAlign: 'center',
+          padding: '14px 24px',
+          fontSize: '11px',
+          color: 'var(--muted)',
+          borderTop: '1px solid var(--border)',
+          background: 'var(--surface)',
+          letterSpacing: '0.2px',
+        }}
+      >
+        TextBridge v1.0 &nbsp;·&nbsp; Built by EG &nbsp;·&nbsp; Powered by Claude AI
+      </footer>
     </div>
   )
 }

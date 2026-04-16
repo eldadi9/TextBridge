@@ -5,10 +5,12 @@ interface InputPanelProps {
   onChange: (value: string) => void
   onTranslate: () => void
   isLoading: boolean
+  inputLang: string
 }
 
-export function InputPanel({ value, onChange, onTranslate, isLoading }: InputPanelProps) {
+export function InputPanel({ value, onChange, onTranslate, isLoading, inputLang }: InputPanelProps) {
   const isEmpty = !value.trim()
+  const isRTL = inputLang === 'he'
 
   return (
     <div
@@ -58,7 +60,9 @@ export function InputPanel({ value, onChange, onTranslate, isLoading }: InputPan
       <textarea
         value={value}
         onChange={e => onChange(e.target.value)}
-        placeholder="Type or paste your text here… Typos are fine — TextBridge understands intent."
+        dir={isRTL ? 'rtl' : 'ltr'}
+        lang={inputLang}
+        placeholder={isRTL ? 'הקלד או הדבק טקסט כאן… TextBridge מבין גם עם שגיאות כתיב.' : 'Type or paste your text here… Typos are fine — TextBridge understands intent.'}
         style={{
           flex: 1,
           background: 'var(--white)',
