@@ -13,9 +13,11 @@ export function Nav({ markdownMode, onMarkdownToggle, onHistoryClick }: NavProps
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '14px 24px',
+        padding: '14px 16px',
         background: 'var(--surface)',
         borderBottom: '1px solid var(--border)',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       {/* Logo */}

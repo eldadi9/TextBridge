@@ -97,11 +97,12 @@ export default function TranslatePanel() {
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          padding: '20px',
+          padding: '16px',
           gap: '16px',
           maxWidth: '1100px',
           width: '100%',
           margin: '0 auto',
+          boxSizing: 'border-box',
         }}
       >
         <LangBar from={from} to={to} onSwap={handleSwap} />

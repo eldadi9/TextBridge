@@ -21,9 +21,11 @@ export function LangBar({ from, to, onSwap }: LangBarProps) {
         alignItems: 'center',
         justifyContent: 'center',
         gap: '14px',
-        padding: '12px 24px',
+        padding: '12px 16px',
         background: 'var(--surface-alt)',
         borderBottom: '1px solid var(--border)',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       <div
