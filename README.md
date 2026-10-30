@@ -8,7 +8,7 @@ TextBridge translates between Hebrew and English using OpenAI, with two distinct
 
 <p align="center">
   <a href="https://nextjs.org">
-    <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white" alt="Next.js">
+    <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white" alt="Next.js">
   </a>
   <a href="https://openai.com">
     <img src="https://img.shields.io/badge/OpenAI-GPT--4o-412991?logo=openai&logoColor=white" alt="OpenAI">
@@ -98,7 +98,7 @@ User Input (Hebrew or English)
 
 | Layer | Technology |
 |-------|------------|
-| Framework | Next.js 15 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | AI — Plain mode | OpenAI gpt-4o-mini |
 | AI — Markdown mode | OpenAI gpt-4o |
@@ -122,7 +122,7 @@ User Input (Hebrew or English)
 
 ## What This Proves
 
-- Next.js 15 App Router with server-side API routes
+- Next.js 16 App Router with server-side API routes
 - OpenAI API integration with model routing by use case
 - Practical product thinking: two distinct modes for two distinct user needs
 - TypeScript + React component architecture
