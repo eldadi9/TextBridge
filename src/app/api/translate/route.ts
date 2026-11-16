@@ -9,10 +9,7 @@ function getOpenAI() {
   return openai
 }
 
-const MODEL: Record<string, string> = {
-  plain: 'gpt-4o-mini',
-  markdown: 'gpt-4o',
-}
+const MODEL = 'gpt-6-luna'
 
 export async function POST(req: NextRequest): Promise<NextResponse<TranslationResponse>> {
   try {
@@ -24,13 +21,14 @@ export async function POST(req: NextRequest): Promise<NextResponse<TranslationRe
     }
 
     const completion = await getOpenAI().chat.completions.create({
-      model: MODEL[mode] ?? 'gpt-4o-mini',
+      model: MODEL,
       messages: [
         { role: 'system', content: buildSystemPrompt(mode) },
         { role: 'user', content: buildUserMessage(text, from, to) },
       ],
       temperature: 0.3,
-      max_tokens: 2048,
+      max_completion_tokens: 2048,
+      reasoning_effort: 'none',
     })
 
     const output = completion.choices[0]?.message?.content ?? ''
