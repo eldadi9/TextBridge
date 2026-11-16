@@ -28,13 +28,17 @@ export function OutputPanel({ output, mode, targetLang, isLoading, error, onRetr
 
   return (
     <div
+      className="panel-output"
       style={{
-        flex: 1,
+        flex: '1 1 0',
+        minWidth: 0,
+        maxWidth: '100%',
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
         background: 'var(--surface-alt)',
+        overflow: 'hidden',
       }}
     >
       {/* Panel header */}
@@ -108,12 +112,16 @@ export function OutputPanel({ output, mode, targetLang, isLoading, error, onRetr
       <div
         style={{
           flex: 1,
+          width: '100%',
+          minWidth: 0,
+          maxWidth: '100%',
           background: 'var(--white)',
           border: '1px solid var(--border-strong)',
           borderRadius: '10px',
           padding: '14px 16px',
           minHeight: '220px',
-          overflowY: 'auto',
+          overflow: 'auto',
+          boxSizing: 'border-box',
           boxShadow: 'inset 0 1px 3px rgba(60,40,10,0.04)',
         }}
       >

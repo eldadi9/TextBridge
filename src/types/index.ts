@@ -1,5 +1,6 @@
 export type Language = 'en' | 'he'
 export type TranslationMode = 'plain' | 'markdown'
+export type AppMode = 'translate' | 'viewer'
 
 export interface TranslationRequest {
   text: string

@@ -1,27 +1,41 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import type { Language, TranslationMode, HistoryEntry } from '@/types'
 import { useHistory } from '@/hooks/useHistory'
-import { Nav } from '@/components/Nav'
 import { LangBar } from '@/components/LangBar'
 import { InputPanel } from '@/components/InputPanel'
 import { OutputPanel } from '@/components/OutputPanel'
 import HistoryStrip from '@/components/HistoryStrip'
 
-export default function TranslatePanel() {
+interface TranslatePanelProps {
+  markdownMode: boolean
+  onMarkdownModeChange: (value: boolean) => void
+  showHistory: boolean
+  pushedColor: { id: number; value: string } | null
+}
+
+export default function TranslatePanel({
+  markdownMode,
+  onMarkdownModeChange,
+  showHistory,
+  pushedColor,
+}: TranslatePanelProps) {
   const [inputText, setInputText] = useState('')
   const [outputText, setOutputText] = useState('')
   const [from, setFrom] = useState<Language>('he')
   const [to, setTo] = useState<Language>('en')
-  const [markdownMode, setMarkdownMode] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [showHistory, setShowHistory] = useState(false)
+  const [activeHistoryId, setActiveHistoryId] = useState<string | null>(null)
 
   const { entries, addEntry, clearHistory } = useHistory()
 
   const mode: TranslationMode = markdownMode ? 'markdown' : 'plain'
+
+  useEffect(() => {
+    if (pushedColor) setInputText(current => current ? `${current.trimEnd()}\n${pushedColor.value}` : pushedColor.value)
+  }, [pushedColor])
 
   const translate = useCallback(async (text: string) => {
     if (!text.trim()) return
@@ -62,44 +76,26 @@ export default function TranslatePanel() {
     }
   }
 
-  const handleClear = () => {
-    setInputText('')
-    setOutputText('')
-    setError(null)
-  }
-
   const handleHistorySelect = (entry: HistoryEntry) => {
     setInputText(entry.input)
     setOutputText(entry.output)
     setFrom(entry.from)
     setTo(entry.to)
-    setMarkdownMode(entry.mode === 'markdown')
+    onMarkdownModeChange(entry.mode === 'markdown')
     setError(null)
+    setActiveHistoryId(entry.id)
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: 'var(--background)',
-      }}
-    >
-      <Nav
-        markdownMode={markdownMode}
-        onMarkdownToggle={() => setMarkdownMode((v) => !v)}
-        onHistoryClick={() => setShowHistory((v) => !v)}
-      />
-
+    <>
       <main
         style={{
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          padding: '16px',
+          padding: '16px 20px',
           gap: '16px',
-          maxWidth: '1100px',
+          maxWidth: '90%',
           width: '100%',
           margin: '0 auto',
           boxSizing: 'border-box',
@@ -113,6 +109,9 @@ export default function TranslatePanel() {
             display: 'flex',
             gap: '16px',
             flex: 1,
+            width: '100%',
+            minWidth: 0,
+            overflow: 'hidden',
           }}
         >
           <InputPanel
@@ -136,24 +135,14 @@ export default function TranslatePanel() {
       {showHistory && (
         <HistoryStrip
           entries={entries}
+          selectedId={activeHistoryId}
           onSelect={handleHistorySelect}
-          onClear={clearHistory}
+          onClear={() => {
+            setActiveHistoryId(null)
+            clearHistory()
+          }}
         />
       )}
-
-      <footer
-        style={{
-          textAlign: 'center',
-          padding: '14px 24px',
-          fontSize: '11px',
-          color: 'var(--muted)',
-          borderTop: '1px solid var(--border)',
-          background: 'var(--surface)',
-          letterSpacing: '0.2px',
-        }}
-      >
-        TextBridge v1.0 &nbsp;·&nbsp; Built by EG &nbsp;·&nbsp; Powered by Claude AI
-      </footer>
-    </div>
+    </>
   )
 }

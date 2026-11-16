@@ -25,53 +25,60 @@ export function MarkdownRenderer({ content, isRtl }: MarkdownRendererProps) {
       </h3>
     ),
     p: ({ children }) => (
-      <p style={{ marginBottom: '8px', color: 'var(--ink)' }}>{children}</p>
+      <p style={{ marginBottom: '8px', color: 'var(--ink)', overflowWrap: 'anywhere', wordBreak: 'break-word' }}>{children}</p>
+    ),
+    a: ({ href, children }) => (
+      <a href={href} style={{ overflowWrap: 'anywhere', wordBreak: 'break-all', color: 'var(--accent)' }} target="_blank" rel="noreferrer">
+        {children}
+      </a>
     ),
     ul: ({ children }) => (
-      <ul style={{ paddingRight: isRtl ? '20px' : '0', paddingLeft: isRtl ? '0' : '20px', marginBottom: '8px' }}>
+      <ul style={{ paddingRight: isRtl ? '20px' : '0', paddingLeft: isRtl ? '0' : '20px', marginBottom: '8px', maxWidth: '100%' }}>
         {children}
       </ul>
     ),
     ol: ({ children }) => (
-      <ol style={{ paddingRight: isRtl ? '20px' : '0', paddingLeft: isRtl ? '0' : '20px', marginBottom: '8px' }}>
+      <ol style={{ paddingRight: isRtl ? '20px' : '0', paddingLeft: isRtl ? '0' : '20px', marginBottom: '8px', maxWidth: '100%' }}>
         {children}
       </ol>
     ),
     li: ({ children }) => (
-      <li style={{ marginBottom: '4px', color: 'var(--ink)' }}>{children}</li>
+      <li style={{ marginBottom: '4px', color: 'var(--ink)', overflowWrap: 'anywhere' }}>{children}</li>
     ),
     code: ({ className, children, ...props }) => {
       const isBlock = className?.startsWith('language-')
       if (isBlock) {
         return (
-          <pre style={{ background: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: '6px', padding: '10px 14px', fontSize: '12px', fontFamily: 'monospace', color: 'var(--accent)', margin: '8px 0', direction: 'ltr', textAlign: 'left', overflowX: 'auto' }}>
+          <pre style={{ background: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: '6px', padding: '10px 14px', fontSize: '12px', fontFamily: 'monospace', color: 'var(--accent)', margin: '8px 0', direction: 'ltr', textAlign: 'left', overflowX: 'auto', maxWidth: '100%', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
             <code className={className}>{children}</code>
           </pre>
         )
       }
       return (
-        <code style={{ background: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: '4px', padding: '1px 5px', fontSize: '12px', fontFamily: 'monospace', color: 'var(--accent)', direction: 'ltr', display: 'inline-block' }} {...props}>
+        <code style={{ background: 'var(--surface-alt)', border: '1px solid var(--border)', borderRadius: '4px', padding: '1px 5px', fontSize: '12px', fontFamily: 'monospace', color: 'var(--accent)', direction: 'ltr', display: 'inline', overflowWrap: 'anywhere', wordBreak: 'break-all' }} {...props}>
           {children}
         </code>
       )
     },
     table: ({ children }) => (
-      <table style={{ borderCollapse: 'collapse', width: '100%', marginBottom: '12px', fontSize: '13px' }}>
-        {children}
-      </table>
+      <div style={{ width: '100%', maxWidth: '100%', overflowX: 'auto', marginBottom: '12px' }}>
+        <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: '13px' }}>
+          {children}
+        </table>
+      </div>
     ),
     th: ({ children }) => (
-      <th style={{ border: '1px solid var(--border)', padding: '6px 10px', background: 'var(--surface-alt)', fontWeight: 600, textAlign: isRtl ? 'right' : 'left' }}>
+      <th style={{ border: '1px solid var(--border)', padding: '6px 10px', background: 'var(--surface-alt)', fontWeight: 600, textAlign: isRtl ? 'right' : 'left', overflowWrap: 'anywhere' }}>
         {children}
       </th>
     ),
     td: ({ children }) => (
-      <td style={{ border: '1px solid var(--border)', padding: '6px 10px', textAlign: isRtl ? 'right' : 'left' }}>
+      <td style={{ border: '1px solid var(--border)', padding: '6px 10px', textAlign: isRtl ? 'right' : 'left', overflowWrap: 'anywhere' }}>
         {children}
       </td>
     ),
     blockquote: ({ children }) => (
-      <blockquote style={{ borderRight: isRtl ? '3px solid var(--border-strong)' : 'none', borderLeft: isRtl ? 'none' : '3px solid var(--border-strong)', paddingRight: isRtl ? '12px' : '0', paddingLeft: isRtl ? '0' : '12px', margin: '8px 0', color: 'var(--muted)', fontStyle: 'italic' }}>
+      <blockquote style={{ borderRight: isRtl ? '3px solid var(--border-strong)' : 'none', borderLeft: isRtl ? 'none' : '3px solid var(--border-strong)', paddingRight: isRtl ? '12px' : '0', paddingLeft: isRtl ? '0' : '12px', margin: '8px 0', color: 'var(--muted)', fontStyle: 'italic', overflowWrap: 'anywhere' }}>
         {children}
       </blockquote>
     ),
@@ -85,6 +92,10 @@ export function MarkdownRenderer({ content, isRtl }: MarkdownRendererProps) {
         lineHeight: '1.7',
         fontSize: '14px',
         color: 'var(--ink)',
+        maxWidth: '100%',
+        minWidth: 0,
+        overflowWrap: 'anywhere',
+        wordBreak: 'break-word',
       }}
     >
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>

@@ -9,11 +9,12 @@ const LANG_LABELS: Record<Language, string> = {
 
 interface HistoryStripProps {
   entries: HistoryEntry[]
+  selectedId: string | null
   onSelect: (entry: HistoryEntry) => void
   onClear: () => void
 }
 
-export default function HistoryStrip({ entries, onSelect, onClear }: HistoryStripProps) {
+export default function HistoryStrip({ entries, selectedId, onSelect, onClear }: HistoryStripProps) {
   if (entries.length === 0) return null
 
   return (
@@ -25,7 +26,6 @@ export default function HistoryStrip({ entries, onSelect, onClear }: HistoryStri
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
-        overflowX: 'auto',
       }}
     >
       <span
@@ -42,32 +42,45 @@ export default function HistoryStrip({ entries, onSelect, onClear }: HistoryStri
         Recent
       </span>
 
-      <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
-        {entries.slice(0, 5).map((entry) => (
+      <div
+        style={{
+          display: 'flex',
+          gap: '6px',
+          flex: 1,
+          minWidth: 0,
+          overflowX: 'auto',
+        }}
+      >
+        {entries.map((entry) => {
+          const selected = entry.id === selectedId
+          return (
           <button
             key={entry.id}
             onClick={() => onSelect(entry)}
             title={entry.input}
+            aria-pressed={selected}
             style={{
-              background: 'var(--surface)',
+              background: selected ? 'var(--ink)' : 'var(--surface)',
               border: '1px solid var(--border)',
               borderRadius: '6px',
               padding: '4px 10px',
               fontSize: '11px',
-              color: 'var(--accent)',
+              color: selected ? 'var(--white)' : 'var(--accent)',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              maxWidth: '160px',
+              maxWidth: '220px',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              flexShrink: 0,
             }}
           >
-            <span style={{ color: 'var(--muted)', marginRight: '4px' }}>
+            <span style={{ color: selected ? 'rgba(255,255,255,0.75)' : 'var(--muted)', marginRight: '4px' }}>
               {LANG_LABELS[entry.from]}→{LANG_LABELS[entry.to]}
             </span>
             {entry.input.length > 30 ? entry.input.slice(0, 30) + '…' : entry.input}
           </button>
-        ))}
+          )
+        })}
       </div>
 
       <button

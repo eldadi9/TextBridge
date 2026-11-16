@@ -16,13 +16,16 @@ export function InputPanel({ value, onChange, onTranslate, isLoading, inputLang 
     <div
       className="panel-input"
       style={{
-        flex: 1,
+        flex: '1 1 0',
+        minWidth: 0,
+        maxWidth: '100%',
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
         background: 'var(--surface)',
         borderRight: '1px solid var(--border)',
+        overflow: 'hidden',
       }}
     >
       {/* Panel header */}
@@ -65,6 +68,9 @@ export function InputPanel({ value, onChange, onTranslate, isLoading, inputLang 
         placeholder={isRTL ? 'הקלד או הדבק טקסט כאן… TextBridge מבין גם עם שגיאות כתיב.' : 'Type or paste your text here… Typos are fine — TextBridge understands intent.'}
         style={{
           flex: 1,
+          width: '100%',
+          minWidth: 0,
+          maxWidth: '100%',
           background: 'var(--white)',
           border: '1px solid var(--border-strong)',
           borderRadius: '10px',
@@ -76,6 +82,9 @@ export function InputPanel({ value, onChange, onTranslate, isLoading, inputLang 
           outline: 'none',
           lineHeight: '1.65',
           minHeight: '220px',
+          overflow: 'auto',
+          overflowWrap: 'anywhere',
+          boxSizing: 'border-box',
           boxShadow: 'inset 0 1px 3px rgba(60,40,10,0.04)',
         }}
         onFocus={e => (e.target.style.borderColor = 'var(--muted)')}
